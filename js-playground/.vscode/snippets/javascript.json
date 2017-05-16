@@ -1,0 +1,271 @@
+{
+  // Place your snippets for JavaScript here. Each snippet is defined under a snippet name and has a prefix, body and 
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+  // same ids are connected.
+  // Example:
+  "Print to console": {
+    "prefix": "log",
+    "body": [
+      "console.log($1);"
+    ],
+    "description": "Log output to console"
+  },
+  "Print to console error": {
+    "prefix": "error",
+    "body": [
+      "console.error($1);"
+    ],
+    "description": "Log error output to console"
+  },
+
+  "var vs let": {
+      "prefix": "demo-const-vs-let-01",
+      "body": [
+        "console.log('x is: ', x);",
+        "",
+        "var x = 1;",
+        "",
+        "console.log('x is: ', x);"
+      ]
+  },
+
+  "let scoping": {
+      "prefix": "demo-const-vs-let-02",
+      "body": [
+        "let x = 1;",
+        "if (x === 1) {",
+        "   let x = 2;",
+        "   console.log('x is: ', x);",
+        "}",
+        "",
+        "console.log('x is: ', x);"
+      ]
+  },
+
+  "constants": {
+      "prefix": "demo-const-vs-let-03",
+      "body": [
+        "const x = 1;",
+        "x = 2;",
+        "console.log('x is: ', x);"
+      ]
+  },
+
+  "import zombie and human": {
+      "prefix": "demo-zombie-import-zombie-and-human",
+      "body": [
+        "const Zombie = require('./samples/Zombie.js');",
+        "const Human = require('./samples/Human.js');"
+      ]
+  },
+
+  "say hi": {
+      "prefix": "demo-zombie-say-hi",
+      "body": [
+        "let bob = new Human('Bob');",
+        "let zombie = new Zombie('George');",
+        "",
+        "console.log(bob.sayHi());",
+        "console.log(zombie.sayHi());"
+      ]
+  },
+
+  "import zombie factory": {
+      "prefix": "demo-zombie-import-factory",
+      "body": [
+        "const ZombieFactory = require('./samples/ZombieFactory.js');"
+      ]
+  },
+
+  "import doStuffCallback": {
+      "prefix": "demo-async-import-do-stuff-callback",
+      "body": [
+        "const doStuff = require('./samples/doStuffCallback.js');"
+      ]
+  },
+
+  "doStuff with callbacks": {
+      "prefix": "demo-async-do-stuff-with-callbacks",
+      "body": [
+        "doStuff(0, function(result) {",
+        "   console.log('Got a result: ' + result);",
+        "   doStuff(result, function(innerResult) {",
+        "       console.log('Got another result: ' + innerResult);",
+        "   });",
+        "});"
+      ]
+  },
+
+  "doStuff with promises": {
+      "prefix": "demo-async-do-stuff-with-promises",
+      "body": [
+        "doStuff(0).then(result => {",
+        "   console.log('Got a result: ' + result);",
+        "   return doStuff(result);",
+        "}).then(result => {",
+        "   console.log('Got another result: ' + result);",
+        "});"
+      ]
+  },
+
+  "doStuff with async": {
+      "prefix": "demo-async-do-stuff-with-async",
+      "body": [
+        "let result = await doStuff(0);",
+        "console.log('Result is ' + result);",
+        "console.log('Got another result: ' + await doStuff(result));"
+      ]
+  },
+
+  "getHorde of a fixed size": {
+      "prefix": "demo-get-horde-fixed-size",
+      "body": [
+        "getHorde(size) {",
+        "",
+        "    const names = [",
+        "        'Cannibal',",
+        "        'Shambler',",
+        "        'Melter', ",
+        "        'Hunter', ",
+        "        'Pincher',",
+        "        'Stinger',",
+        "        'Crier',",
+        "        'Stinker',",
+        "        'Creeper',",
+        "        'Crawler'",
+        "    ];",
+        "",
+        "    const conditions = [",
+        "        'fresh', ",
+        "        'slightly-decayed',",
+        "        'decayed',",
+        "        'horribly-decayed'",
+        "    ];",
+        "",
+        "    const zombies = Array(size);",
+        "",
+        "    for (let i=0; i < size; i++) {",
+        "        const name = names[Math.floor(Math.random()*names.length)];",
+        "        const condition = conditions[Math.floor(Math.random()*conditions.length)];",
+        "        zombies[i] = new Zombie(name, condition);",
+        "    }",
+        "",
+        "    return zombies;",
+        "}"
+      ]
+  },
+
+  "getHorde with generator": {
+      "prefix": "demo-get-horde-using-generator",
+      "body": [
+        "*getHorde() {",
+        "",
+        "    const names = [",
+        "        'Cannibal',",
+        "        'Shambler',",
+        "        'Melter', ",
+        "        'Hunter', ",
+        "        'Pincher',",
+        "        'Stinger',",
+        "        'Crier',",
+        "        'Stinker',",
+        "        'Creeper',",
+        "        'Crawler'",
+        "    ];",
+        "",
+        "    const conditions = [",
+        "        'fresh', ",
+        "        'slightly-decayed',",
+        "        'decayed',",
+        "        'horribly-decayed'",
+        "    ];",
+        "",
+        "    while (true) {",
+        "        const name = names[Math.floor(Math.random()*names.length)];",
+        "        const condition = conditions[Math.floor(Math.random()*conditions.length)];",
+        "        yield new Zombie(name, condition);",
+        "    }",
+        "}",
+        ""
+      ]
+  },
+
+  "using LINQ-like syntax": {
+      "prefix": "demo-zombie-report-using-linq",
+      "body": [
+        "const factory = new ZombieFactory();",
+        "",
+        "const zombies = factory.getHorde(100);",
+        "",
+        "const result = zombies.groupBy(x => x.condition)",
+        "                      .select(g => new {condition: g.key, count: g.count()})",
+        "                      .orderByDescending(x => x.count)",
+        "                      .toArray();",
+        "",
+        "console.log(result);"
+      ]
+  },
+
+  "import lodash": {
+      "prefix": "demo-import-lodash",
+      "body": [
+        "const _ = require('lodash');"
+      ]
+  },
+
+  "import moment": {
+      "prefix": "demo-import-moment",
+      "body": [
+        "const moment = require('moment');"
+      ]
+  },
+
+  "get report using lodash": {
+      "prefix": "demo-zombie-report-using-lodash",
+      "body": [
+        "const result = _(zombies)",
+        "    .groupBy(x => x.condition)",
+        "    .map((v,k) => ({condition:k, count: v.length}))",
+        "    .orderBy(['count'], ['desc'])",
+        "    .value();"
+      ]
+  },
+
+  "comparing moment() and new Date()": {
+      "prefix": "demo-moment-vs-new-date",
+      "body": [
+        "console.log(new Date().toString());",
+        "console.log(moment().toString());"
+      ]
+  },
+
+  "parsing with moment": {
+      "prefix": "demo-moment-parsing",
+      "body": [
+        "//ISO-8601 with timezone",
+        "console.log(moment('2017-04-28 09:30:26.123-06:00').toString());",
+        "//\"Old school\" ASP.NET JSON date",
+        "console.log(moment('/Date(1198908717056-0700)/').toString());"
+      ]
+  },
+
+  "manipulating with moment": {
+      "prefix": "demo-moment-manipulation",
+      "body": [
+        "console.log(moment().add(1, 'week').toString());",
+        "console.log(moment().add(3, 'months').toString());",
+        "console.log(moment().add({days:2, weeks:5, years:10}).toString());"
+      ]
+  },
+
+  "startOf with moment": {
+      "prefix": "demo-moment-start-of",
+      "body": [
+        "console.log(moment().startOf('day').toString());",
+        "console.log(moment().startOf('week').toString());",
+        "console.log(moment().startOf('month').toString());",
+        "console.log(moment().startOf('year').toString());"
+      ]
+  }
+}

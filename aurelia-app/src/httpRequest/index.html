@@ -1,0 +1,11 @@
+<template>
+
+    <div class="container">
+        <h1 if.bind="isLoading">
+            Getting data, please wait...
+        </h1>
+
+        <pre if.bind="!isLoading">${data}</pre>
+    </div>
+
+</template>

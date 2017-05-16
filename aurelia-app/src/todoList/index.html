@@ -1,0 +1,38 @@
+<template>
+    <div class="container" style="margin-bottom: 2em;">
+        <h1>${heading}</h1>
+
+        <form class="form-inline" submit.trigger="addTodo()">
+            <div class="form-group">
+                <input class="form-control" type="text" value.bind="todoDescription">
+            </div>
+            <button class="btn btn-primary" type="submit">Add Todo</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <p class="lead">
+            ${lastAction}
+        </p>
+    </div>
+
+    <div class="container">
+        <p class="lead" if.bind="todos.length === 0">
+            You have no TODO items yet! 
+        </p>
+        <div class="panel panel-default" if.bind="todos.length > 0">
+            <div class="panel-body">
+                <ul>
+                    <li repeat.for="todo of todos">
+                        <label css="text-decoration: ${todo.done ? 'line-through' : 'none'}">
+                            <input type="checkbox" checked.bind="todo.done" change.delegate="todoChecked(todo)">
+                            ${todo.description}
+                            <button class="btn btn-sm btn-link" click.trigger="removeTodo(todo)">remove</button>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</template>
